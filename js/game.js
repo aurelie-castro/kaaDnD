@@ -11,7 +11,7 @@ let config = {
         create: create,
         update: update
     },
-    backgroundColor: '#9fe79f',
+    backgroundColor: '#88e288',
     audio: {
         disableWebAudio: true
     },
@@ -41,14 +41,11 @@ function init() {
 }
 
 function preload() {
-    this.load.image('background', './assets/peterpanFull-01.png');
+    this.load.image('background', './assets/serpent-01.png');
     
-    this.load.image('head', './assets/pHead-01.png');
-    this.load.image('body', './assets/pBody-01.png');
-    this.load.image('handL', './assets/pArmL-01.png');
-    this.load.image('handR', './assets/pArmR-01.png');
-    this.load.image('legL', './assets/pLegL-01.png');
-    this.load.image('legR', './assets/pLegR-01.png');
+    this.load.image('head', './assets/snakeHead-01.png');
+    this.load.image('middle', './assets/snakeMiddle-01.png');
+    this.load.image('end', './assets/snakeEnd-01.png');
     
     this.load.image('nextArrow', './assets/green-arrow (1).png');
     
@@ -98,7 +95,7 @@ function create() {
     soundButton.on('pointerdown', enableMusic);
     
     //----les membres-----
-    var head = this.add.image(50, 380, 'head', Phaser.Math.RND.pick(frames)).setInteractive();
+    var head = this.add.image(300, 520, 'head', Phaser.Math.RND.pick(frames)).setInteractive();
     this.input.setDraggable(head);
 //    head.setScale(2);
     head.setName('head');
@@ -110,56 +107,43 @@ function create() {
     nextArrow.setScale(0.7);
     nextArrow.setVisible(false);
     
-    var body = this.add.image(60, 550, 'body', Phaser.Math.RND.pick(frames)).setInteractive();
-    this.input.setDraggable(body);
-    body.setName('body');
-//    body.setScale(0.45);
     
-    var handL = this.add.image(310, 92, 'handL', Phaser.Math.RND.pick(frames)).setInteractive();
-    this.input.setDraggable(handL);
-    handL.setName('handL');
+    var middle = this.add.image(100, 500, 'middle', Phaser.Math.RND.pick(frames)).setInteractive();
+    this.input.setDraggable(middle);
+    middle.setName('middle');
 //    handL.setScale(0.45);
     
-    var handR = this.add.image(200, 552, 'handR', Phaser.Math.RND.pick(frames)).setInteractive();
-    this.input.setDraggable(handR);
-    handR.setName('handR');
+    var end = this.add.image(200, 60, 'end', Phaser.Math.RND.pick(frames)).setInteractive();
+    this.input.setDraggable(end);
+    end.setName('end');
 //    hips.setScale(0.45);
     
-    var legL = this.add.image(50, 212, 'legL', Phaser.Math.RND.pick(frames)).setInteractive();
-    this.input.setDraggable(legL);
-    legL.setName('legL');
-//    legL.setScale(0.45);
-    
-    var legR = this.add.image(310, 570, 'legR', Phaser.Math.RND.pick(frames)).setInteractive();
-    this.input.setDraggable(legR);
-    legR.setName('legR');
-//    legR.setScale(0.45);
     
     //-----les drop zones----
+
     //  A drop zone
-    var zone = this.add.zone(200, 95, 115, 120).setRectangleDropZone(115, 120);
-    zone.setName('head');
-    
-    //  A drop zone
-    var zone2 = this.add.zone(211, 227, 80, 137).setRectangleDropZone(80, 137);
-    zone2.setName('body');
-    
-    //  A drop zone
-    var zone3 = this.add.zone(135, 221, 65, 130).setRectangleDropZone(65, 130);
-    zone3.setName('handL');
+    var zone3 = this.add.zone(150, 190, 65, 130).setRectangleDropZone(65, 130);
+    zone3.setName('head');
     
     
     //  A drop zone
-    var zone4 = this.add.zone(252, 383, 90, 170).setRectangleDropZone(90, 170);
-    zone4.setName('legR');
+    var zone4 = this.add.zone(200, 295, 120, 170).setRectangleDropZone(120, 170);
+    zone4.setName('end');
     
     //  A drop zone
-    var zone5 = this.add.zone(160, 385, 90, 170).setRectangleDropZone(90, 170);
-    zone5.setName('legL');
+    var zone5 = this.add.zone(170, 330, 130, 100).setRectangleDropZone(130, 100);
+    zone5.setName('middle');
     
-    //  A drop zone
-    var zone6 = this.add.zone(270, 230, 40, 130).setRectangleDropZone(40, 130);
-    zone6.setName('handR');
+
+    
+//        var graphics = this.add.graphics();
+//    graphics.lineStyle(2, 0xffff00);
+//    
+//    graphics.strokeRect(zone3.x - zone3.input.hitArea.width / 2, zone3.y - zone3.input.hitArea.height / 2, zone3.input.hitArea.width, zone3.input.hitArea.height);
+//    
+//    graphics.strokeRect(zone4.x - zone4.input.hitArea.width / 2, zone4.y - zone4.input.hitArea.height / 2, zone4.input.hitArea.width, zone4.input.hitArea.height);
+//    
+//    graphics.strokeRect(zone5.x - zone5.input.hitArea.width / 2, zone5.y - zone5.input.hitArea.height / 2, zone5.input.hitArea.width, zone5.input.hitArea.height);
 
  
     this.input.on('dragstart', function (pointer, gameObject) {
@@ -215,7 +199,7 @@ else{
             gameObject.y = gameObject.input.dragStartY;
         }
         
-      if(successfulDropoff === 6){
+      if(successfulDropoff === 3){
             console.log("well done!!!!");
             nextArrow.setVisible(true);
             nextArrow.setInteractive();
@@ -233,7 +217,7 @@ else{
 
 
 function update() {
-    if(successfulDropoff === 6){
+    if(successfulDropoff === 3){
          starScale += 0.001;
         star.setScale(starScale);
         if (starScale > 0.2){
@@ -246,7 +230,7 @@ function update() {
 }
 function onClick(){
 //    window.open("https://www.google.com", "_blank");
-    window.location.replace("http://www.w3schools.com");
+    window.location.replace("https://games.caramel.be/shere-khan/index.html");
 
 }
 function enableMusic(){

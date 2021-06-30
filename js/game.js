@@ -61,14 +61,14 @@ function preload() {
     this.load.image('star', './assets/green-star.png');
     
      //---background pattern---
-    this.load.image('gameBg', './assets/stars (1)-01.png');
+    this.load.image('gameBg', './assets/newleaf-01.png');
 
 }
 
 function create() { 
     
-    gameBg = this.add.image(180, 330, 'gameBg');
-    gameBg.setScale(0.4);
+    gameBg = this.add.image(180, 320, 'gameBg');
+//    gameBg.setScale(0.4);
     gameBg.setVisible(false);
     
      //---star---

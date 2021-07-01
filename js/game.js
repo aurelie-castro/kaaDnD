@@ -13,7 +13,7 @@ let config = {
     },
     backgroundColor: '#88e288',
     audio: {
-        disableWebAudio: true
+        disableWebAudio: false
     },
     autoCenter: true
 };
@@ -68,7 +68,6 @@ function preload() {
 function create() { 
     
     gameBg = this.add.image(180, 320, 'gameBg');
-//    gameBg.setScale(0.4);
     gameBg.setVisible(false);
     
      //---star---
@@ -97,9 +96,7 @@ function create() {
     //----les membres-----
     var head = this.add.image(300, 520, 'head', Phaser.Math.RND.pick(frames)).setInteractive();
     this.input.setDraggable(head);
-//    head.setScale(2);
     head.setName('head');
-//    head.setScale(0.45);
     
     successfulDropoff = 0;
     
@@ -111,12 +108,10 @@ function create() {
     var middle = this.add.image(100, 500, 'middle', Phaser.Math.RND.pick(frames)).setInteractive();
     this.input.setDraggable(middle);
     middle.setName('middle');
-//    handL.setScale(0.45);
     
     var end = this.add.image(200, 60, 'end', Phaser.Math.RND.pick(frames)).setInteractive();
     this.input.setDraggable(end);
     end.setName('end');
-//    hips.setScale(0.45);
     
     
     //-----les drop zones----
@@ -134,17 +129,6 @@ function create() {
     var zone5 = this.add.zone(170, 330, 130, 100).setRectangleDropZone(130, 100);
     zone5.setName('middle');
     
-
-    
-//        var graphics = this.add.graphics();
-//    graphics.lineStyle(2, 0xffff00);
-//    
-//    graphics.strokeRect(zone3.x - zone3.input.hitArea.width / 2, zone3.y - zone3.input.hitArea.height / 2, zone3.input.hitArea.width, zone3.input.hitArea.height);
-//    
-//    graphics.strokeRect(zone4.x - zone4.input.hitArea.width / 2, zone4.y - zone4.input.hitArea.height / 2, zone4.input.hitArea.width, zone4.input.hitArea.height);
-//    
-//    graphics.strokeRect(zone5.x - zone5.input.hitArea.width / 2, zone5.y - zone5.input.hitArea.height / 2, zone5.input.hitArea.width, zone5.input.hitArea.height);
-
  
     this.input.on('dragstart', function (pointer, gameObject) {
 
@@ -174,8 +158,6 @@ function create() {
             gameObject.y = dropZone.y;
 
             gameObject.input.enabled = false;
-            console.log(dropZone.name == gameObject.name);
-            console.log('successful dropoff of ' + gameObject.name + ' in ' + dropZone.name);
             
             successfulDropoff++;
             correctSound.play();
@@ -183,7 +165,6 @@ function create() {
 else{
             gameObject.x = gameObject.input.dragStartX;
             gameObject.y = gameObject.input.dragStartY;
-            console.log('failed dropoff of ' + gameObject.name + ' in ' + dropZone.name);
     
             wrongSound.play();
         }
@@ -200,7 +181,6 @@ else{
         }
         
       if(successfulDropoff === 3){
-            console.log("well done!!!!");
             nextArrow.setVisible(true);
             nextArrow.setInteractive();
           finishSound.play();
@@ -229,7 +209,6 @@ function update() {
         }
 }
 function onClick(){
-//    window.open("https://www.google.com", "_blank");
     window.location.replace("https://games.caramel.be/shere-khan/index.html");
 
 }
